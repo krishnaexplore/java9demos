@@ -16,6 +16,17 @@ java -cp lib/jackson-annotations-2.6.6.jar:lib/jackson-core-2.6.6.jar:lib/jackso
 * check the dependencies ```jdeps -cp lib/jackson-annotations-2.6.6.jar:lib/jackson-core-2.6.6.jar:lib/jackson-databdatabind-2.6.6.jar:lib/booksdomain.jar -s lib/booksdomain.jar```
 
 ```
+  module booksdomain {
+  requires jackson.core;
+  requires jackson.databind;
+  requires jackson.annotations;
+  requires java.sql;
+
+  opens org.books;
+}
+```
+
+```
 javac -d mods --module-path lib --module-source-path src -m booksdomain
 jar --create --file lib/booksdomain.jar  -C mods/booksdomain .
 java --module-path lib -m booksdomain/org.books.Main < books.json
