@@ -94,5 +94,15 @@ java --module-path lib -m booksdomain/org.books.Main < books.json
     2017-10-16 10:30:00.0: Book.
 
   ```
+* we can check list modules for our custom jre
+  ```./myownjre/bin/java --list-modules```
+  * output similar to
+    ```
+    java.base@10.0.2
+    java.logging@10.0.2
+    java.sql@10.0.2
+    java.xml@10.0.2
+    ```
+  * this app using only two modules from JRE (java.base and java.sql), (java.logging, java.xml) are transitive dependencies (from java.sql)
 ## TODO dockerize this app (only with required modules)
 
