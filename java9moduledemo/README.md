@@ -1,6 +1,9 @@
 
 # Java
-
+## Overview
+ * This app just reads .json file prints on console, i've used jackson libraries to transform json string into Java objects,  
+ * Reason to picking the jackson libs to show how we can migrate this app with 3rd party libraries which are not yet migrated to JPMS (Java platform module system).
+ 
 ## Classpath way
 ```
 git clone https://github.com/krishnaexplore/java9demos.git
@@ -48,7 +51,7 @@ java -cp lib/jackson-core-2.6.6.jar:lib/jackson-databind-2.6.6.jar:lib/jackson-a
         opens org.books;
       }
     ```
-  * this app depdendence on 3 third party libraries, in JPMS we've to declair dependencies in module-info.java, <b>requires</b> is keyword to declair dependency
+  * this app dependence on 3 third party libraries, in JPMS we've to declair dependencies in module-info.java, <b>requires</b> is keyword to declair dependency
   
   * since jackson libraries works with reflection apis, so our code need to open to those libraries, that is why we've ```opens org.books```
 
@@ -78,7 +81,7 @@ java --module-path lib -m booksdomain/org.books.Main < books.json
 
 * create custom JRE : ```$JAVA_HOME/bin/jlink --module-path mods/ --add-modules java.sql --output myownjre```
 * check size ```du -sh myownjre```
-* run custom jre ```./myjre/bin/java --show-module-resolution --module-path lib -m booksdomain/org.books.Main < books.json```
+* run custom jre ```./myownjre/bin/java --show-module-resolution --module-path lib -m booksdomain/org.books.Main < books.json```
 * if see you ouput similar to below the JPMS is working with custom jre as well
   ```
     java9moduledemo kgangaraju$ ./myownjre/bin/java  --module-path lib -m booksdomain/org.books.Main < books.json
